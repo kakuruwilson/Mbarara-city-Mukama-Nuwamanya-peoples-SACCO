@@ -1,4 +1,4 @@
-# Kaguta Farmers SACCO — Management System
+# Mbarara City mukama Nuwamanya People's SACCO — Management System
 
 A responsive SACCO management system that runs on Windows 7/10, desktop/laptop PCs, and Android phones (via browser), both online and offline once installed locally.
 
