@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobile Money Deposits — MBARARA CITY MUKAMA NUWAMANYA PEOPLE'S SACCO</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="icons/fontawesome/css/all.min.css">
+</head>
+<body>
+<div class="waves-container">
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+</div>
+
+<div class="sidebar-backdrop"></div>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="mark">M</div><span>MBARARA CITY MUKAMA NUWAMANYA<br>PEOPLE'S SACCO</span></div>
+    <nav class="sidebar-nav">
+      <div class="group-label">Overview</div>
+      <a href="dashboard.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+      <div class="group-label">Manage</div>
+      <a href="members.html"><i class="fa-solid fa-users"></i> Members</a>
+      <a href="loans.html"><i class="fa-solid fa-hand-holding-dollar"></i> Loans</a>
+      <a href="savings.html"><i class="fa-solid fa-piggy-bank"></i> Savings & Shares</a>
+      <a href="transactions.html"><i class="fa-solid fa-right-left"></i> Transactions</a>
+      <a href="mobile-money.html" class="active"><i class="fa-solid fa-mobile-screen-button"></i> Mobile Money</a>
+      <div class="group-label">System</div>
+      <a href="reports.html"><i class="fa-solid fa-chart-line"></i> Reports</a>
+      <a href="statements.html"><i class="fa-solid fa-file-invoice-dollar"></i> Statements</a>
+      <a href="notifications.html"><i class="fa-solid fa-bell"></i> Notifications</a>
+      <a href="monthly-payments.html"><i class="fa-solid fa-calendar-check"></i> Monthly Payments</a>
+      <a href="settings.html"><i class="fa-solid fa-gears"></i> Settings</a>
+    </nav>
+    <div class="sidebar-footer">Signed in as Administrator<br><a href="php/logout.php" data-logout style="color:var(--yellow);">Log out</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="flex gap-16">
+        <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        <div class="topbar-title"><h2>Mobile Money Deposits</h2><p>Verify and approve mobile money deposits from members</p></div>
+      </div>
+      <span class="sync-indicator"><span class="dot"></span> Connected & synced</span>
+    </div>
+
+    <div class="content">
+      <div class="card" style="margin-bottom: 20px; background: #E7EEF8; border-color: var(--navy);">
+        <div class="panel-head"><h3 style="color: var(--navy);"><i class="fa-solid fa-info-circle" style="margin-right: 8px;"></i> Mobile Money Instructions for Members</h3></div>
+        <div style="font-size: 14px; line-height: 1.8;">
+          <p><strong>Airtel Money:</strong> Dial *185# → Send Money → Enter SACCO Till Number → Enter Member Number as Reference → Enter Amount → Confirm with PIN</p>
+          <p><strong>MTN Mobile Money:</strong> Dial *165# → Send Money → Enter SACCO Till Number → Enter Member Number as Reference → Enter Amount → Confirm with PIN</p>
+          <p class="text-soft" style="margin-top: 8px;"><i class="fa-solid fa-circle-info" style="margin-right: 6px;"></i> Members must include their Member Number (e.g., MCMNP-0001) in the reference field. Admin will receive notification and verify the deposit.</p>
+        </div>
+      </div>
+
+      <div class="panel-grid">
+        <div class="card" style="grid-column: 1 / -1;">
+          <div class="panel-head"><h3>Pending Mobile Money Deposits</h3></div>
+          <div class="table-wrap">
+            <table class="data-table" id="mobile-money-table">
+              <thead>
+                <tr>
+                  <th>Reference</th>
+                  <th>Member</th>
+                  <th>Amount</th>
+                  <th>Provider</th>
+                  <th>Sender Number</th>
+                  <th>Received</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="mobile-money-body">
+                <tr>
+                  <td colspan="8" class="text-center text-soft">Loading...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="card">
+        <div class="panel-head"><h3>Verified Mobile Money Deposits</h3></div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Reference</th>
+                <th>Member</th>
+                <th>Amount</th>
+                <th>Provider</th>
+                <th>Verified By</th>
+                <th>Verified At</th>
+              </tr>
+            </thead>
+            <tbody id="verified-mobile-money-body">
+              <tr>
+                <td colspan="6" class="text-center text-soft">Loading...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/mobile-money.js"></script>
+</body>
+</html>

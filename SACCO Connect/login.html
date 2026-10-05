@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign in — MBARARA CITY MUKAMA NUWAMANYA PEOPLE'S SACCO</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="icons/fontawesome/css/all.min.css">
+<!-- ^ download Font Awesome's free "web fonts + css" package and place it at
+     icons/fontawesome/ so icons work fully offline. -->
+</head>
+<body>
+  <div class="waves-container">
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
+  
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-logo">M</div>
+      <h1>Welcome back</h1>
+      <p class="auth-sub">Sign in to MBARARA CITY MUKAMA NUWAMANYA PEOPLE'S SACCO — staff and members use the same form.</p>
+
+      <div id="server-message" style="display:none;" class="field-error show"></div>
+
+      <form id="login-form" action="php/login.php" method="POST" novalidate>
+        <label for="username">Username, member number, or phone</label>
+        <input type="text" id="username" name="username" placeholder="e.g. MCMNP-0001 or your username" autocomplete="username">
+        <div class="field-error" id="username-error"></div>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" autocomplete="current-password">
+        <div class="field-error" id="password-error"></div>
+
+        <button type="submit" class="btn btn-primary btn-block">
+          <span class="btn-text">Sign in</span>
+          <span class="spinner" style="display:none;"></span>
+        </button>
+      </form>
+
+      <div class="auth-links">
+        <a href="forgot-password.html">Forgot password?</a> &nbsp;·&nbsp;
+        <a href="register.html">Register as a new member</a>
+      </div>
+
+      <div class="offline-note">
+        <i class="fa-solid fa-wifi"></i>
+        This system also works without internet once installed on a local computer.
+      </div>
+    </div>
+  </div>
+
+  <script src="js/validation.js"></script>
+  <script>
+    // Show query-string messages from php/login.php redirects
+    const params = new URLSearchParams(window.location.search);
+    const msgBox = document.getElementById('server-message');
+    if (params.get('error') === 'invalid_credentials') {
+      msgBox.textContent = 'Incorrect username or password.'; msgBox.style.display = 'block';
+    } else if (params.get('error') === 'missing_fields') {
+      msgBox.textContent = 'Please fill in both fields.'; msgBox.style.display = 'block';
+    } else if (params.get('registered')) {
+      msgBox.textContent = 'Registered! Your member number is ' + params.get('registered') + '. You can sign in now.';
+      msgBox.style.color = 'var(--success)'; msgBox.style.display = 'block';
+    } else if (params.get('password_changed')) {
+      msgBox.textContent = 'Password changed successfully. Please sign in with your new password.';
+      msgBox.style.color = 'var(--success)'; msgBox.style.display = 'block';
+    } else if (params.get('error') === 'activation_required') {
+      msgBox.textContent = 'Account activation required. Please contact admin to pay the 15,000 UGX activation fee.';
+      msgBox.style.display = 'block';
+    }
+
+    // Form submission loading state
+    document.getElementById('login-form').addEventListener('submit', function() {
+      const btn = this.querySelector('button[type="submit"]');
+      btn.classList.add('btn-loading');
+      btn.disabled = true;
+    });
+  </script>
+</body>
+</html>

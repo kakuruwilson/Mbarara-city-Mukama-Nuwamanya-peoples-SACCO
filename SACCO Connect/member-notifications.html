@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Notifications — MBARARA CITY MUKAMA NUWAMANYA PEOPLE'S SACCO</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="icons/fontawesome/css/all.min.css">
+</head>
+<body>
+<div class="waves-container">
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+</div>
+
+<div class="sidebar-backdrop"></div>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="mark">M</div><span>MBARARA CITY MUKAMA NUWAMANYA<br>PEOPLE'S SACCO</span></div>
+    <nav class="sidebar-nav">
+      <div class="group-label">My account</div>
+      <a href="member-dashboard.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+      <a href="member-savings.html"><i class="fa-solid fa-piggy-bank"></i> Savings</a>
+      <a href="member-loans.html"><i class="fa-solid fa-hand-holding-dollar"></i> Loans</a>
+      <a href="member-transactions.html"><i class="fa-solid fa-right-left"></i> Transactions</a>
+      <a href="member-notifications.html" class="active"><i class="fa-solid fa-bell"></i> Notifications</a>
+      <a href="member-profile.html"><i class="fa-solid fa-user"></i> Profile</a>
+    </nav>
+    <div class="sidebar-footer">Signed in as <span id="member-name">Member</span> (<span id="member-no">MCMNP-0001</span>)<br><a href="php/logout.php" data-logout style="color:var(--yellow);">Log out</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="flex gap-16">
+        <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        <div class="topbar-title"><h2>My Notifications</h2><p>View all notifications sent to you by the SACCO</p></div>
+      </div>
+      <span class="sync-indicator"><span class="dot"></span> Connected & synced</span>
+    </div>
+
+    <div class="content">
+      <div class="card" style="margin-bottom: 20px; background: #FEF3DA; border-color: var(--yellow-deep);">
+        <div class="panel-head"><h3 style="color: var(--yellow-deep);"><i class="fa-solid fa-circle-info" style="margin-right: 8px;"></i> Notification Information</h3></div>
+        <p style="font-size: 14px; line-height: 1.8;">
+          Each notification sent to you (Email, WhatsApp, or SMS) costs <strong>200 UGX</strong>, which is deducted from your savings balance.
+          <br>You receive notifications for: deposits, withdrawals, loan approvals/repayments, activation fee payments, monthly statements, and balance updates.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="panel-head"><h3>Notification History</h3></div>
+        <div class="table-wrap">
+          <table class="data-table" id="my-notifications-table">
+            <thead><tr><th>Date</th><th>Type</th><th>Subject</th><th>Message</th><th>Cost</th></tr></thead>
+            <tbody id="my-notifications-body">
+              <tr>
+                <td colspan="5" class="text-center text-soft">Loading...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/member-notifications.js"></script>
+</body>
+</html>

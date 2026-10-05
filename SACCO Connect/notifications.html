@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notifications — MBARARA CITY MUKAMA NUWAMANYA PEOPLE'S SACCO</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="icons/fontawesome/css/all.min.css">
+</head>
+<body>
+<div class="waves-container">
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+</div>
+
+<div class="sidebar-backdrop"></div>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="mark">M</div><span>MBARARA CITY MUKAMA NUWAMANYA<br>PEOPLE'S SACCO</span></div>
+    <nav class="sidebar-nav">
+      <div class="group-label">Overview</div>
+      <a href="dashboard.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+      <div class="group-label">Manage</div>
+      <a href="members.html"><i class="fa-solid fa-users"></i> Members</a>
+      <a href="loans.html"><i class="fa-solid fa-hand-holding-dollar"></i> Loans</a>
+      <a href="savings.html"><i class="fa-solid fa-piggy-bank"></i> Savings & Shares</a>
+      <a href="transactions.html"><i class="fa-solid fa-right-left"></i> Transactions</a>
+      <a href="mobile-money.html"><i class="fa-solid fa-mobile-screen-button"></i> Mobile Money</a>
+      <div class="group-label">System</div>
+      <a href="reports.html"><i class="fa-solid fa-chart-line"></i> Reports</a>
+      <a href="statements.html"><i class="fa-solid fa-file-invoice-dollar"></i> Statements</a>
+      <a href="notifications.html" class="active"><i class="fa-solid fa-bell"></i> Notifications</a>
+      <a href="monthly-payments.html"><i class="fa-solid fa-calendar-check"></i> Monthly Payments</a>
+      <a href="settings.html"><i class="fa-solid fa-gears"></i> Settings</a>
+    </nav>
+    <div class="sidebar-footer">Signed in as Administrator<br><a href="php/logout.php" data-logout style="color:var(--yellow);">Log out</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="flex gap-16">
+        <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        <div class="topbar-title"><h2>Notifications</h2><p>Send notifications to members via Email, WhatsApp, or SMS</p></div>
+      </div>
+      <span class="sync-indicator"><span class="dot"></span> Connected & synced</span>
+    </div>
+
+    <div class="content">
+      <div class="card" style="margin-bottom: 20px; background: #FEF3DA; border-color: var(--yellow-deep);">
+        <div class="panel-head"><h3 style="color: var(--yellow-deep);"><i class="fa-solid fa-circle-info" style="margin-right: 8px;"></i> Notification Costs</h3></div>
+        <div style="font-size: 14px; line-height: 1.8;">
+          <p><strong>Cost per notification: 200 UGX</strong> (applies to Email, WhatsApp, and SMS)</p>
+          <p>SMS delivery supports both <strong>Airtel</strong> and <strong>MTN</strong> networks.</p>
+          <p>WhatsApp notifications require member's WhatsApp number to be registered.</p>
+        </div>
+      </div>
+
+      <div class="panel-grid">
+        <div class="card">
+          <div class="panel-head"><h3>Send Custom Notification</h3></div>
+          <form id="notification-form" action="php/notifications.php" method="POST">
+            <input type="hidden" name="action" value="send">
+            
+            <label for="notif_member_id">Member number (leave blank for broadcast)</label>
+            <input type="text" id="notif_member_id" name="member_id" placeholder="e.g. MCMNP-0001 or leave empty for all members">
+
+            <label for="notif_type">Notification type</label>
+            <select id="notif_type" name="type" required>
+              <option value="email">Email</option>
+              <option value="whatsapp">WhatsApp</option>
+              <option value="sms_airtel">SMS (Airtel)</option>
+              <option value="sms_mtn">SMS (MTN)</option>
+            </select>
+
+            <label for="notif_subject">Subject (for Email)</label>
+            <input type="text" id="notif_subject" name="subject" placeholder="Notification subject">
+
+            <label for="notif_message">Message</label>
+            <textarea id="notif_message" name="message" rows="4" required placeholder="Enter your message..."></textarea>
+
+            <button type="submit" class="btn btn-primary btn-block">
+              <span class="btn-text">Send Notification</span>
+              <span class="spinner" style="display:none;"></span>
+            </button>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="panel-head"><h3>Notification Templates</h3></div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <button type="button" class="btn btn-outline" onclick="loadTemplate('deposit')">
+              <i class="fa-solid fa-money-bill-wave"></i> Deposit Confirmation
+            </button>
+            <button type="button" class="btn btn-outline" onclick="loadTemplate('withdrawal')">
+              <i class="fa-solid fa-hand-holding-dollar"></i> Withdrawal Confirmation
+            </button>
+            <button type="button" class="btn btn-outline" onclick="loadTemplate('activation')">
+              <i class="fa-solid fa-key"></i> Activation Fee Paid
+            </button>
+            <button type="button" class="btn btn-outline" onclick="loadTemplate('loan_approved')">
+              <i class="fa-solid fa-check-circle"></i> Loan Approved
+            </button>
+            <button type="button" class="btn btn-outline" onclick="loadTemplate('loan_repayment')">
+              <i class="fa-solid fa-rotate-left"></i> Loan Repayment Due
+            </button>
+            <button type="button" class="btn btn-outline" onclick="loadTemplate('monthly_fee')">
+              <i class="fa-solid fa-calendar-check"></i> Monthly Fee Due
+            </button>
+            <button type="button" class="btn btn-outline" onclick="loadTemplate('statement')">
+              <i class="fa-solid fa-file-invoice-dollar"></i> Statement Available
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="card">
+        <div class="panel-head"><h3>Notification History</h3></div>
+        <div class="table-wrap">
+          <table class="data-table" id="notifications-table">
+            <thead>
+              <tr>
+                <th>Member</th>
+                <th>Type</th>
+                <th>Subject</th>
+                <th>Message Preview</th>
+                <th>Cost</th>
+                <th>Status</th>
+                <th>Sent At</th>
+              </tr>
+            </thead>
+            <tbody id="notifications-body">
+              <tr>
+                <td colspan="7" class="text-center text-soft">Loading...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/notifications.js"></script>
+</body>
+</html>

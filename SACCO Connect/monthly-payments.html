@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monthly Payments — MBARARA CITY MUKAMA NUWAMANYA PEOPLE'S SACCO</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="icons/fontawesome/css/all.min.css">
+</head>
+<body>
+<div class="waves-container">
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+</div>
+
+<div class="sidebar-backdrop"></div>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="mark">M</div><span>MBARARA CITY MUKAMA NUWAMANYA<br>PEOPLE'S SACCO</span></div>
+    <nav class="sidebar-nav">
+      <div class="group-label">Overview</div>
+      <a href="dashboard.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+      <div class="group-label">Manage</div>
+      <a href="members.html"><i class="fa-solid fa-users"></i> Members</a>
+      <a href="loans.html"><i class="fa-solid fa-hand-holding-dollar"></i> Loans</a>
+      <a href="savings.html"><i class="fa-solid fa-piggy-bank"></i> Savings & Shares</a>
+      <a href="transactions.html"><i class="fa-solid fa-right-left"></i> Transactions</a>
+      <a href="mobile-money.html"><i class="fa-solid fa-mobile-screen-button"></i> Mobile Money</a>
+      <div class="group-label">System</div>
+      <a href="reports.html"><i class="fa-solid fa-chart-line"></i> Reports</a>
+      <a href="statements.html"><i class="fa-solid fa-file-invoice-dollar"></i> Statements</a>
+      <a href="notifications.html"><i class="fa-solid fa-bell"></i> Notifications</a>
+      <a href="monthly-payments.html" class="active"><i class="fa-solid fa-calendar-check"></i> Monthly Payments</a>
+      <a href="settings.html"><i class="fa-solid fa-gears"></i> Settings</a>
+    </nav>
+    <div class="sidebar-footer">Signed in as Administrator<br><a href="php/logout.php" data-logout style="color:var(--yellow);">Log out</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="flex gap-16">
+        <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        <div class="topbar-title"><h2>Monthly Payments</h2><p>Track SACCO monthly subscription payments to ABSA Bank</p></div>
+      </div>
+      <span class="sync-indicator"><span class="dot"></span> Connected & synced</span>
+    </div>
+
+    <div class="content">
+      <div class="card" style="margin-bottom: 20px; background: #E7EEF8; border-color: var(--navy);">
+        <div class="panel-head"><h3 style="color: var(--navy);"><i class="fa-solid fa-university" style="margin-right: 8px;"></i> ABSA Bank Account Details</h3></div>
+        <div class="flex flex-between" style="flex-wrap: wrap; gap: 16px;">
+          <div>
+            <p><strong>Account Name:</strong> MBARARA CITY MUKAMA NUWAMANYA PEOPLE'S SACCO</p>
+            <p><strong>Account Number:</strong> 6010003286</p>
+            <p><strong>Bank:</strong> ABSA Bank Uganda</p>
+          </div>
+          <div>
+            <p><strong>Monthly Fee:</strong> 50,000 UGX (configurable in Settings)</p>
+            <p><strong>Due Date:</strong> 1st of every month</p>
+            <p><strong>Payment Reference:</strong> SACCO-MONTHLY-YYYY-MM</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-grid">
+        <div class="card">
+          <div class="panel-head"><h3>Record Monthly Payment</h3></div>
+          <form id="monthly-payment-form" action="php/monthly-payments.php" method="POST">
+            <input type="hidden" name="action" value="record">
+            
+            <label for="payment_month">Payment month</label>
+            <input type="month" id="payment_month" name="payment_month" required>
+
+            <label for="payment_amount">Amount (UGX)</label>
+            <input type="number" id="payment_amount" name="amount" min="1000" step="1000" value="50000" required>
+
+            <label for="payment_reference">Payment reference</label>
+            <input type="text" id="payment_reference" name="payment_reference" placeholder="e.g. SACCO-MONTHLY-2024-01" required>
+
+            <label for="payment_status">Status</label>
+            <select id="payment_status" name="status" required>
+              <option value="paid">Paid</option>
+              <option value="pending">Pending</option>
+            </select>
+
+            <button type="submit" class="btn btn-primary btn-block">
+              <span class="btn-text">Record Payment</span>
+              <span class="spinner" style="display:none;"></span>
+            </button>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="panel-head"><h3>Current Status</h3></div>
+          <div id="payment-status-summary">
+            <div class="stat-grid" style="margin-bottom: 16px;">
+              <div class="stat-card">
+                <div class="icon blue"><i class="fa-solid fa-calendar"></i></div>
+                <div class="value" id="current-month-status">--</div>
+                <div class="label">Current Month</div>
+              </div>
+              <div class="stat-card">
+                <div class="icon yellow"><i class="fa-solid fa-money-bill-wave"></i></div>
+                <div class="value" id="total-paid">UGX 0</div>
+                <div class="label">Total Paid</div>
+              </div>
+              <div class="stat-card">
+                <div class="icon green"><i class="fa-solid fa-check"></i></div>
+                <div class="value" id="paid-count">0</div>
+                <div class="label">Months Paid</div>
+              </div>
+              <div class="stat-card">
+                <div class="icon red"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <div class="value" id="overdue-count">0</div>
+                <div class="label">Overdue Months</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="card">
+        <div class="panel-head"><h3>Payment History</h3></div>
+        <div class="table-wrap">
+          <table class="data-table" id="monthly-payments-table">
+            <thead>
+              <tr>
+                <th>Month</th>
+                <th>Amount</th>
+                <th>Reference</th>
+                <th>Status</th>
+                <th>Paid By</th>
+                <th>Paid At</th>
+                <th>Recorded</th>
+              </tr>
+            </thead>
+            <tbody id="monthly-payments-body">
+              <tr>
+                <td colspan="7" class="text-center text-soft">Loading...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/monthly-payments.js"></script>
+</body>
+</html>

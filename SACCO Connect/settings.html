@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings — MBARARA CITY MUKAMA NUWAMANYA PEOPLE'S SACCO</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="icons/fontawesome/css/all.min.css">
+</head>
+<body>
+<div class="waves-container">
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+</div>
+
+<div class="sidebar-backdrop"></div>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="mark">M</div><span>MBARARA CITY MUKAMA NUWAMANYA<br>PEOPLE'S SACCO</span></div>
+    <nav class="sidebar-nav">
+      <div class="group-label">Overview</div>
+      <a href="dashboard.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+      <div class="group-label">Manage</div>
+      <a href="members.html"><i class="fa-solid fa-users"></i> Members</a>
+      <a href="loans.html"><i class="fa-solid fa-hand-holding-dollar"></i> Loans</a>
+      <a href="savings.html"><i class="fa-solid fa-piggy-bank"></i> Savings & Shares</a>
+      <a href="transactions.html"><i class="fa-solid fa-right-left"></i> Transactions</a>
+      <a href="mobile-money.html"><i class="fa-solid fa-mobile-screen-button"></i> Mobile Money</a>
+      <div class="group-label">System</div>
+      <a href="reports.html"><i class="fa-solid fa-chart-line"></i> Reports</a>
+      <a href="statements.html"><i class="fa-solid fa-file-invoice-dollar"></i> Statements</a>
+      <a href="notifications.html"><i class="fa-solid fa-bell"></i> Notifications</a>
+      <a href="monthly-payments.html"><i class="fa-solid fa-calendar-check"></i> Monthly Payments</a>
+      <a href="settings.html" class="active"><i class="fa-solid fa-gears"></i> Settings</a>
+    </nav>
+    <div class="sidebar-footer">Signed in as Administrator<br><a href="php/logout.php" data-logout style="color:var(--yellow);">Log out</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="flex gap-16">
+        <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        <div class="topbar-title"><h2>Settings</h2><p>Users, system configuration, and audit logs</p></div>
+      </div>
+      <span class="sync-indicator"><span class="dot"></span> Connected & synced</span>
+    </div>
+
+    <div class="content">
+      <div class="panel-grid">
+        <div class="card">
+          <div class="panel-head"><h3>Staff users</h3>
+            <button class="btn btn-primary" style="padding:7px 14px; font-size:12.5px;" onclick="document.getElementById('add-user-modal').style.display='flex'"><i class="fa-solid fa-plus"></i> Add user</button></div>
+          <div class="table-wrap">
+            <table class="data-table" id="staff-table">
+              <thead><tr><th>Name</th><th>Username</th><th>Role</th><th>Email</th><th>Status</th><th>Password Changed</th><th>Action</th></tr></thead>
+              <tbody id="staff-body">
+                <tr>
+                  <td colspan="7" class="text-center text-soft">Loading...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="panel-head"><h3>System settings</h3></div>
+          <form action="php/settings.php" method="POST" id="settings-form">
+            <input type="hidden" name="action" value="update">
+            <label for="sacco_name">SACCO name</label>
+            <input type="text" id="sacco_name" name="sacco_name" value="MBARARA CITY MUKAMA NUWAMANYA PEOPLE'S SACCO" readonly style="background: #F4F6FA;">
+            <small class="text-soft">SACCO name is fixed. Contact system administrator to change.</small>
+            
+            <label for="interest_rate">Default loan interest rate (%)</label>
+            <input type="number" id="interest_rate" name="interest_rate" value="10" step="0.1" min="0" max="50">
+            
+            <label for="share_value">Share value (UGX)</label>
+            <input type="number" id="share_value" name="share_value" value="20000" step="1000" min="1000">
+            
+            <label for="activation_fee">Activation fee (UGX)</label>
+            <input type="number" id="activation_fee" name="activation_fee" value="15000" step="1000" min="1000">
+            
+            <label for="min_deposit">Minimum deposit (UGX)</label>
+            <input type="number" id="min_deposit" name="min_deposit" value="1000" step="100" min="100">
+            
+            <label for="min_withdrawal">Minimum withdrawal (UGX)</label>
+            <input type="number" id="min_withdrawal" name="min_withdrawal" value="5000" step="1000" min="1000">
+            
+            <label for="notification_cost">Notification cost (UGX)</label>
+            <input type="number" id="notification_cost" name="notification_cost" value="200" step="50" min="50">
+            
+            <label for="monthly_fee">Monthly ABSA payment (UGX)</label>
+            <input type="number" id="monthly_fee" name="monthly_fee" value="50000" step="1000" min="1000">
+            
+            <label for="absa_account">ABSA Account Number</label>
+            <input type="text" id="absa_account" name="absa_account" value="6010003286" readonly style="background: #F4F6FA;">
+            
+            <button type="submit" class="btn btn-secondary btn-block">Save settings</button>
+          </form>
+          <div class="offline-note" style="margin-top:16px;">
+            <i class="fa-solid fa-database"></i>
+            <span><a href="php/backup.php" target="_blank">Back up database</a> · <a href="#">Restore from backup file</a></span>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="card">
+        <div class="panel-head"><h3>Change Admin Password</h3></div>
+        <form action="php/settings.php" method="POST" id="password-form">
+          <input type="hidden" name="action" value="change_password">
+          <label for="current_password">Current password</label>
+          <input type="password" id="current_password" name="current_password" required autocomplete="current-password">
+          <label for="new_password">New password (min 8 chars, upper, lower, number, special)</label>
+          <input type="password" id="new_password" name="new_password" required autocomplete="new-password" minlength="8">
+          <div class="password-strength" id="admin-password-strength"><div class="password-strength-bar" id="admin-password-strength-bar"></div></div>
+          <label for="confirm_new_password">Confirm new password</label>
+          <input type="password" id="confirm_new_password" name="confirm_new_password" required autocomplete="new-password">
+          <button type="submit" class="btn btn-primary btn-block">Change Password</button>
+        </form>
+      </div>
+
+      <br>
+
+      <div class="card">
+        <div class="panel-head"><h3>Audit log</h3></div>
+        <div class="table-wrap">
+          <table class="data-table" id="audit-table">
+            <thead><tr><th>User</th><th>Action</th><th>Details</th><th>IP Address</th><th>Date</th></tr></thead>
+            <tbody id="audit-body">
+              <tr>
+                <td colspan="5" class="text-center text-soft">Loading...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Add user modal -->
+<div id="add-user-modal" style="display:none; position:fixed; inset:0; background:rgba(7,26,51,0.5); align-items:center; justify-content:center; z-index:200;">
+  <div class="card" style="width:100%; max-width:440px;">
+    <div class="panel-head"><h3>Add staff user</h3><a href="#" onclick="document.getElementById('add-user-modal').style.display='none'; return false;"><i class="fa-solid fa-xmark"></i></a></div>
+    <form action="php/settings.php" method="POST" id="add-user-form">
+      <input type="hidden" name="action" value="add_user">
+      <label for="user_username">Username</label>
+      <input type="text" id="user_username" name="username" required>
+      <label for="user_full_name">Full name</label>
+      <input type="text" id="user_full_name" name="full_name" required>
+      <label for="user_email">Email</label>
+      <input type="email" id="user_email" name="email">
+      <label for="user_phone">Phone</label>
+      <input type="text" id="user_phone" name="phone">
+      <label for="user_role">Role</label>
+      <select id="user_role" name="role" required>
+        <option value="administrator">Administrator</option>
+        <option value="manager">Manager</option>
+        <option value="cashier">Cashier</option>
+        <option value="loan_officer">Loan Officer</option>
+      </select>
+      <label for="user_password">Initial password</label>
+      <input type="password" id="user_password" name="password" required minlength="8">
+      <div class="password-strength" id="user-password-strength"><div class="password-strength-bar" id="user-password-strength-bar"></div></div>
+      <button type="submit" class="btn btn-primary btn-block">Add user</button>
+    </form>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/settings.js"></script>
+</body>
+</html>

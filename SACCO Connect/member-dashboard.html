@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Account — MBARARA CITY MUKAMA NUWAMANYA PEOPLE'S SACCO</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="icons/fontawesome/css/all.min.css">
+</head>
+<body>
+<div class="waves-container">
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+</div>
+
+<div class="sidebar-backdrop"></div>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="mark">M</div><span>MBARARA CITY MUKAMA NUWAMANYA<br>PEOPLE'S SACCO</span></div>
+    <nav class="sidebar-nav">
+      <div class="group-label">My account</div>
+      <a href="member-dashboard.html" class="active"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+      <a href="member-savings.html"><i class="fa-solid fa-piggy-bank"></i> Savings</a>
+      <a href="member-loans.html"><i class="fa-solid fa-hand-holding-dollar"></i> Loans</a>
+      <a href="member-transactions.html"><i class="fa-solid fa-right-left"></i> Transactions</a>
+      <a href="member-notifications.html"><i class="fa-solid fa-bell"></i> Notifications</a>
+      <a href="member-profile.html"><i class="fa-solid fa-user"></i> Profile</a>
+    </nav>
+    <div class="sidebar-footer">Signed in as <span id="member-name">Member</span> (<span id="member-no">MCMNP-0001</span>)<br><a href="php/logout.php" data-logout style="color:var(--yellow);">Log out</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="flex gap-16">
+        <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        <div class="topbar-title"><h2>Welcome back, <span id="welcome-name">Member</span></h2><p>Here's your account at a glance</p></div>
+      </div>
+      <span class="sync-indicator"><span class="dot"></span> Connected & synced</span>
+    </div>
+
+    <div class="content">
+      <div class="stat-grid">
+        <div class="stat-card"><div class="icon blue"><i class="fa-solid fa-piggy-bank"></i></div><div class="value" id="my-savings">UGX 0</div><div class="label">Savings balance</div></div>
+        <div class="stat-card"><div class="icon yellow"><i class="fa-solid fa-chart-pie"></i></div><div class="value" id="my-shares">0</div><div class="label">Shares held</div></div>
+        <div class="stat-card"><div class="icon red"><i class="fa-solid fa-hand-holding-dollar"></i></div><div class="value" id="my-loan-balance">UGX 0</div><div class="label">Active loan balance</div></div>
+        <div class="stat-card"><div class="icon green"><i class="fa-solid fa-sack-dollar"></i></div><div class="value" id="my-dividend">UGX 0</div><div class="label">Estimated dividend</div></div>
+      </div>
+
+      <div class="card">
+        <div class="panel-head">
+          <h3>Recent transactions</h3>
+          <a href="member-savings.html" class="btn btn-primary">Make a deposit</a>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Type</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead>
+            <tbody id="my-recent-txns">
+              <tr>
+                <td colspan="4" class="text-center text-soft">Loading...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 20px; background: #E7EEF8; border-color: var(--navy);">
+        <div class="panel-head"><h3 style="color: var(--navy);"><i class="fa-solid fa-circle-info" style="margin-right: 8px;"></i> Important Information</h3></div>
+        <ul style="font-size: 13px; line-height: 1.8; padding-left: 20px;">
+          <li>All transactions are processed by SACCO admin. You will receive notifications via Email, WhatsApp, or SMS for every transaction.</li>
+          <li>Notification cost: <strong>200 UGX</strong> per message (deducted from your savings balance).</li>
+          <li>To deposit via Mobile Money: Dial *185# (Airtel) or *165# (MTN) → Send Money → Enter SACCO Till Number → Reference: Your Member Number (MCMNP-XXXX) → Enter Amount → Confirm with PIN.</li>
+          <li>Minimum deposit: 1,000 UGX | Minimum withdrawal: 5,000 UGX</li>
+          <li>Account activation fee: 15,000 UGX (non-withdrawable, one-time)</li>
+          <li>Request your statement or balance check from the admin at any time.</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/member-dashboard.js"></script>
+</body>
+</html>

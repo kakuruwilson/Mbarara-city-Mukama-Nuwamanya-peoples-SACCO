@@ -1,0 +1,42 @@
+/* ============================================================
+   Responsive rules — tablets and Android phone browsers
+   ============================================================ */
+
+@media (max-width: 992px){
+  .sidebar{
+    position:fixed;
+    left:0; top:0;
+    height:100vh;
+    transform:translateX(-100%);
+    transition:transform .2s ease;
+    z-index:100;
+  }
+  .sidebar.open{ transform:translateX(0); }
+  .menu-toggle{ display:inline-block; }
+  .content{ padding:18px 16px 50px; }
+  .topbar{ padding:14px 16px; }
+}
+
+@media (max-width: 992px){
+  .sidebar-backdrop{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(7,26,51,0.5);
+    z-index:90;
+  }
+  .sidebar-backdrop.show{ display:block; }
+}
+
+@media (max-width: 640px){
+  .stat-grid{ grid-template-columns:1fr 1fr; }
+  .topbar-title h2{ font-size:16px; }
+  .topbar-title p{ display:none; }
+  .table-toolbar{ flex-direction:column; align-items:stretch; }
+  .search-box{ min-width:0; }
+  .auth-card{ padding:28px 22px; }
+}
+
+@media (max-width: 420px){
+  .stat-grid{ grid-template-columns:1fr; }
+}

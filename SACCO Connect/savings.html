@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Savings & Shares — MBARARA CITY MUKAMA NUWAMANYA PEOPLE'S SACCO</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="icons/fontawesome/css/all.min.css">
+</head>
+<body>
+<div class="waves-container">
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+</div>
+
+<div class="sidebar-backdrop"></div>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="mark">M</div><span>MBARARA CITY MUKAMA NUWAMANYA<br>PEOPLE'S SACCO</span></div>
+    <nav class="sidebar-nav">
+      <div class="group-label">Overview</div>
+      <a href="dashboard.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+      <div class="group-label">Manage</div>
+      <a href="members.html"><i class="fa-solid fa-users"></i> Members</a>
+      <a href="loans.html"><i class="fa-solid fa-hand-holding-dollar"></i> Loans</a>
+      <a href="savings.html" class="active"><i class="fa-solid fa-piggy-bank"></i> Savings & Shares</a>
+      <a href="transactions.html"><i class="fa-solid fa-right-left"></i> Transactions</a>
+      <a href="mobile-money.html"><i class="fa-solid fa-mobile-screen-button"></i> Mobile Money</a>
+      <div class="group-label">System</div>
+      <a href="reports.html"><i class="fa-solid fa-chart-line"></i> Reports</a>
+      <a href="statements.html"><i class="fa-solid fa-file-invoice-dollar"></i> Statements</a>
+      <a href="notifications.html"><i class="fa-solid fa-bell"></i> Notifications</a>
+      <a href="monthly-payments.html"><i class="fa-solid fa-calendar-check"></i> Monthly Payments</a>
+      <a href="settings.html"><i class="fa-solid fa-gears"></i> Settings</a>
+    </nav>
+    <div class="sidebar-footer">Signed in as Administrator<br><a href="php/logout.php" data-logout style="color:var(--yellow);">Log out</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="flex gap-16">
+        <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        <div class="topbar-title"><h2>Savings & Shares</h2><p>Record deposits, withdrawals, and share purchases</p></div>
+      </div>
+      <span class="sync-indicator"><span class="dot"></span> Connected & synced</span>
+    </div>
+
+    <div class="content">
+      <div class="panel-grid">
+        <div class="card">
+          <div class="panel-head"><h3>Record a transaction</h3></div>
+          <form id="transaction-form" action="php/savings.php" method="POST">
+            <label for="member_id">Member number</label>
+            <input type="text" id="member_id" name="member_id" placeholder="e.g. MCMNP-0001" required>
+
+            <label for="txn_type">Type</label>
+            <select id="txn_type" name="action">
+              <option value="deposit">Deposit</option>
+              <option value="withdrawal">Withdrawal</option>
+              <option value="activation_fee">Activation Fee (15,000 UGX)</option>
+            </select>
+
+            <label for="amount">Amount (UGX)</label>
+            <input type="number" id="amount" name="amount" min="1000" required>
+            <div class="field-error" id="amount-error"></div>
+
+            <label for="notes">Notes (optional)</label>
+            <textarea id="notes" name="notes" rows="2" placeholder="e.g. Weekly group contribution"></textarea>
+
+            <button type="submit" class="btn btn-primary btn-block">
+              <span class="btn-text">Record transaction</span>
+              <span class="spinner" style="display:none;"></span>
+            </button>
+          </form>
+          <div style="margin-top: 12px; padding: 12px; background: #FEF3DA; border-radius: 8px; font-size: 13px; color: var(--yellow-deep);">
+            <i class="fa-solid fa-info-circle" style="margin-right: 8px;"></i>
+            <strong>Rules:</strong> Min deposit: 1,000 UGX | Min withdrawal: 5,000 UGX | Activation fee: 15,000 UGX (non-withdrawable)
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="panel-head"><h3>Shares</h3></div>
+          <p class="text-soft" style="font-size:13.5px;">Current share value: <strong>UGX 20,000</strong> per share.</p>
+          <form action="php/shares.php" method="POST" id="shares-form">
+            <label for="share_member_id">Member number</label>
+            <input type="text" id="share_member_id" name="member_id" placeholder="e.g. MCMNP-0001" required>
+            <label for="shares_count">Number of shares to buy</label>
+            <input type="number" id="shares_count" name="shares_count" min="1" required>
+            <button type="submit" class="btn btn-secondary btn-block">Record share purchase</button>
+          </form>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="card">
+        <div class="panel-head"><h3>Recent savings transactions</h3></div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Member</th><th>Type</th><th>Amount</th><th>Balance after</th><th>Status</th><th>Date</th></tr></thead>
+            <tbody id="savings-transactions">
+              <tr>
+                <td colspan="6" class="text-center text-soft">Loading...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/validation.js"></script>
+<script src="js/savings.js"></script>
+</body>
+</html>

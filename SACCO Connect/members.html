@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Members — MBARARA CITY MUKAMA NUWAMANYA PEOPLE'S SACCO</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="icons/fontawesome/css/all.min.css">
+</head>
+<body>
+<div class="waves-container">
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+</div>
+
+<div class="sidebar-backdrop"></div>
+<div class="app-shell">
+
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="mark">M</div>
+      <span>MBARARA CITY MUKAMA NUWAMANYA<br>PEOPLE'S SACCO</span>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="group-label">Overview</div>
+      <a href="dashboard.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+      <div class="group-label">Manage</div>
+      <a href="members.html" class="active"><i class="fa-solid fa-users"></i> Members</a>
+      <a href="loans.html"><i class="fa-solid fa-hand-holding-dollar"></i> Loans</a>
+      <a href="savings.html"><i class="fa-solid fa-piggy-bank"></i> Savings & Shares</a>
+      <a href="transactions.html"><i class="fa-solid fa-right-left"></i> Transactions</a>
+      <a href="mobile-money.html"><i class="fa-solid fa-mobile-screen-button"></i> Mobile Money</a>
+      <div class="group-label">System</div>
+      <a href="reports.html"><i class="fa-solid fa-chart-line"></i> Reports</a>
+      <a href="statements.html"><i class="fa-solid fa-file-invoice-dollar"></i> Statements</a>
+      <a href="notifications.html"><i class="fa-solid fa-bell"></i> Notifications</a>
+      <a href="monthly-payments.html"><i class="fa-solid fa-calendar-check"></i> Monthly Payments</a>
+      <a href="settings.html"><i class="fa-solid fa-gears"></i> Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      Signed in as Administrator<br>
+      <a href="php/logout.php" data-logout style="color:var(--yellow);">Log out</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="flex gap-16">
+        <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        <div class="topbar-title">
+          <h2>Members</h2>
+          <p>Register and manage SACCO members</p>
+        </div>
+      </div>
+      <span class="sync-indicator"><span class="dot"></span> Connected & synced</span>
+    </div>
+
+    <div class="content">
+      <div class="card">
+        <div class="table-toolbar">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass text-soft"></i>
+            <input type="text" placeholder="Search members…" data-table-search="members-table">
+          </div>
+          <button class="btn btn-primary" onclick="document.getElementById('add-member-modal').style.display='flex'">
+            <i class="fa-solid fa-plus"></i> Add member
+          </button>
+        </div>
+
+        <div class="table-wrap">
+          <table class="data-table" id="members-table">
+            <thead>
+              <tr><th>Member No.</th><th>Name</th><th>Phone</th><th>Email</th><th>Savings balance</th><th>Activation Fee</th><th>Status</th><th>Joined</th><th></th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="9" class="text-center text-soft">Loading...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Add member modal -->
+<div id="add-member-modal" style="display:none; position:fixed; inset:0; background:rgba(7,26,51,0.5); align-items:center; justify-content:center; z-index:200;">
+  <div class="card" style="width:100%; max-width:480px; max-height:90vh; overflow-y:auto;">
+    <div class="panel-head"><h3>Add new member</h3>
+      <a href="#" onclick="document.getElementById('add-member-modal').style.display='none'; return false;"><i class="fa-solid fa-xmark"></i></a>
+    </div>
+    <form action="php/members.php" method="POST" id="add-member-form">
+      <input type="hidden" name="action" value="add">
+      <label for="full_name">Full name</label>
+      <input type="text" id="full_name" name="full_name" required>
+      <label for="phone">Phone (Airtel/MTN for notifications)</label>
+      <input type="text" id="phone" name="phone" required placeholder="e.g. 0772 123 456">
+      <label for="email">Email (optional)</label>
+      <input type="email" id="email" name="email">
+      <label for="gender">Gender</label>
+      <select id="gender" name="gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+      <label for="national_id">National ID</label>
+      <input type="text" id="national_id" name="national_id">
+      <label for="address">Address</label>
+      <input type="text" id="address" name="address">
+      <label for="nok_name">Next of kin name</label>
+      <input type="text" id="nok_name" name="nok_name">
+      <label for="nok_phone">Next of kin phone</label>
+      <input type="text" id="nok_phone" name="nok_phone">
+      <div class="flex gap-16" style="margin-top: 16px;">
+        <div style="flex:1;">
+          <label for="member_password">Initial password</label>
+          <input type="password" id="member_password" name="password" placeholder="Min 8 characters">
+        </div>
+        <div style="flex:1;">
+          <label for="confirm_password">Confirm password</label>
+          <input type="password" id="confirm_password" name="confirm_password">
+        </div>
+      </div>
+      <div class="password-strength" id="password-strength"><div class="password-strength-bar" id="password-strength-bar"></div></div>
+      <small class="text-soft">Activation fee: 15,000 UGX (non-withdrawable). Min deposit: 1,000 UGX. Min withdrawal: 5,000 UGX.</small>
+      <button type="submit" class="btn btn-primary btn-block">Register member</button>
+    </form>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/members.js"></script>
+</body>
+</html>

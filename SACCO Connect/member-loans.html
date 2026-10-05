@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Loans — MBARARA CITY MUKAMA NUWAMANYA PEOPLE'S SACCO</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="icons/fontawesome/css/all.min.css">
+</head>
+<body>
+<div class="waves-container">
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+</div>
+
+<div class="sidebar-backdrop"></div>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="mark">M</div><span>MBARARA CITY MUKAMA NUWAMANYA<br>PEOPLE'S SACCO</span></div>
+    <nav class="sidebar-nav">
+      <div class="group-label">My account</div>
+      <a href="member-dashboard.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+      <a href="member-savings.html"><i class="fa-solid fa-piggy-bank"></i> Savings</a>
+      <a href="member-loans.html" class="active"><i class="fa-solid fa-hand-holding-dollar"></i> Loans</a>
+      <a href="member-transactions.html"><i class="fa-solid fa-right-left"></i> Transactions</a>
+      <a href="member-notifications.html"><i class="fa-solid fa-bell"></i> Notifications</a>
+      <a href="member-profile.html"><i class="fa-solid fa-user"></i> Profile</a>
+    </nav>
+    <div class="sidebar-footer">Signed in as <span id="member-name">Member</span> (<span id="member-no">MCMNP-0001</span>)<br><a href="php/logout.php" data-logout style="color:var(--yellow);">Log out</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="flex gap-16">
+        <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        <div class="topbar-title"><h2>My Loans</h2><p>View your loan applications and repayments</p></div>
+      </div>
+      <span class="sync-indicator"><span class="dot"></span> Connected & synced</span>
+    </div>
+
+    <div class="content">
+      <div class="card" style="margin-bottom: 20px;">
+        <div class="panel-head"><h3>Active Loans</h3></div>
+        <div class="table-wrap">
+          <table class="data-table" id="active-loans-table">
+            <thead><tr><th>Loan ID</th><th>Principal</th><th>Interest Rate</th><th>Term</th><th>Outstanding</th><th>Status</th><th>Applied</th></tr></thead>
+            <tbody id="active-loans-body">
+              <tr>
+                <td colspan="7" class="text-center text-soft">Loading...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom: 20px;">
+        <div class="panel-head"><h3>Loan Repayment History</h3></div>
+        <div class="table-wrap">
+          <table class="data-table" id="repayment-table">
+            <thead><tr><th>Loan</th><th>Amount Paid</th><th>Balance After</th><th>Date</th></tr></thead>
+            <tbody id="repayment-body">
+              <tr>
+                <td colspan="4" class="text-center text-soft">Loading...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="panel-head"><h3>Apply for New Loan</h3></div>
+        <form id="loan-apply-form" action="php/loans.php" method="POST">
+          <input type="hidden" name="action" value="apply_member">
+          <label for="principal">Loan amount (UGX)</label>
+          <input type="number" id="principal" name="principal" min="10000" required>
+          <label for="interest_rate">Interest rate (%)</label>
+          <input type="number" id="interest_rate" name="interest_rate" value="10" step="0.1" readonly style="background: #F4F6FA;">
+          <label for="term_months">Term (months)</label>
+          <input type="number" id="term_months" name="term_months" value="6" min="1" max="60">
+          <label for="purpose">Purpose</label>
+          <input type="text" id="purpose" name="purpose" placeholder="e.g. Farm inputs, Business capital" required>
+          <button type="submit" class="btn btn-primary btn-block">
+            <span class="btn-text">Submit Application</span>
+            <span class="spinner" style="display:none;"></span>
+          </button>
+        </form>
+        <p class="text-soft" style="font-size: 12px; margin-top: 8px;">Loan applications are reviewed by admin. You'll be notified of the decision via your preferred contact method.</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/member-loans.js"></script>
+</body>
+</html>

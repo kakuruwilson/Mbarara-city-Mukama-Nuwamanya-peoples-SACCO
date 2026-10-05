@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loans — MBARARA CITY MUKAMA NUWAMANYA PEOPLE'S SACCO</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="icons/fontawesome/css/all.min.css">
+</head>
+<body>
+<div class="waves-container">
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+</div>
+
+<div class="sidebar-backdrop"></div>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="mark">M</div><span>MBARARA CITY MUKAMA NUWAMANYA<br>PEOPLE'S SACCO</span></div>
+    <nav class="sidebar-nav">
+      <div class="group-label">Overview</div>
+      <a href="dashboard.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+      <div class="group-label">Manage</div>
+      <a href="members.html"><i class="fa-solid fa-users"></i> Members</a>
+      <a href="loans.html" class="active"><i class="fa-solid fa-hand-holding-dollar"></i> Loans</a>
+      <a href="savings.html"><i class="fa-solid fa-piggy-bank"></i> Savings & Shares</a>
+      <a href="transactions.html"><i class="fa-solid fa-right-left"></i> Transactions</a>
+      <a href="mobile-money.html"><i class="fa-solid fa-mobile-screen-button"></i> Mobile Money</a>
+      <div class="group-label">System</div>
+      <a href="reports.html"><i class="fa-solid fa-chart-line"></i> Reports</a>
+      <a href="statements.html"><i class="fa-solid fa-file-invoice-dollar"></i> Statements</a>
+      <a href="notifications.html"><i class="fa-solid fa-bell"></i> Notifications</a>
+      <a href="monthly-payments.html"><i class="fa-solid fa-calendar-check"></i> Monthly Payments</a>
+      <a href="settings.html"><i class="fa-solid fa-gears"></i> Settings</a>
+    </nav>
+    <div class="sidebar-footer">Signed in as Administrator<br><a href="php/logout.php" data-logout style="color:var(--yellow);">Log out</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="flex gap-16">
+        <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        <div class="topbar-title"><h2>Loans</h2><p>Applications, approvals, and repayments</p></div>
+      </div>
+      <span class="sync-indicator"><span class="dot"></span> Connected & synced</span>
+    </div>
+
+    <div class="content">
+      <div class="stat-grid">
+        <div class="stat-card"><div class="icon yellow"><i class="fa-solid fa-clock"></i></div><div class="value" id="stat-pending-loans">0</div><div class="label">Pending approval</div></div>
+        <div class="stat-card"><div class="icon blue"><i class="fa-solid fa-hand-holding-dollar"></i></div><div class="value" id="stat-active-loans">0</div><div class="label">Active loans</div></div>
+        <div class="stat-card"><div class="icon green"><i class="fa-solid fa-circle-check"></i></div><div class="value" id="stat-completed-loans">0</div><div class="label">Completed</div></div>
+        <div class="stat-card"><div class="icon red"><i class="fa-solid fa-sack-dollar"></i></div><div class="value" id="stat-outstanding">UGX 0</div><div class="label">Total outstanding</div></div>
+      </div>
+
+      <div class="card">
+        <div class="table-toolbar">
+          <div class="search-box"><i class="fa-solid fa-magnifying-glass text-soft"></i><input type="text" placeholder="Search loans…" data-table-search="loans-table"></div>
+          <button class="btn btn-primary" onclick="document.getElementById('apply-loan-modal').style.display='flex'"><i class="fa-solid fa-plus"></i> New application</button>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table" id="loans-table">
+            <thead><tr><th>Member</th><th>Principal</th><th>Rate</th><th>Term</th><th>Outstanding</th><th>Status</th><th>Applied</th><th>Action</th></tr></thead>
+            <tbody id="loans-body">
+              <tr>
+                <td colspan="8" class="text-center text-soft">Loading...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="apply-loan-modal" style="display:none; position:fixed; inset:0; background:rgba(7,26,51,0.5); align-items:center; justify-content:center; z-index:200;">
+  <div class="card" style="width:100%; max-width:440px;">
+    <div class="panel-head"><h3>New loan application</h3><a href="#" onclick="document.getElementById('apply-loan-modal').style.display='none'; return false;"><i class="fa-solid fa-xmark"></i></a></div>
+    <form id="loan-form" action="php/loans.php" method="POST">
+      <input type="hidden" name="action" value="apply">
+      <label for="member_id">Member number</label>
+      <input type="text" id="member_id" name="member_id" placeholder="e.g. MCMNP-0001" required>
+      <label for="principal">Loan amount (UGX)</label>
+      <input type="number" id="principal" name="principal" min="10000" required>
+      <label for="interest_rate">Interest rate (%)</label>
+      <input type="number" id="interest_rate" name="interest_rate" value="10" step="0.1">
+      <label for="term_months">Term (months)</label>
+      <input type="number" id="term_months" name="term_months" value="6" min="1" max="60">
+      <label for="purpose">Purpose</label>
+      <input type="text" id="purpose" name="purpose" placeholder="e.g. Farm inputs" required>
+      <div class="field-error" id="purpose-error"></div>
+      <button type="submit" class="btn btn-primary btn-block">Submit application</button>
+    </form>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/validation.js"></script>
+<script src="js/loans.js"></script>
+</body>
+</html>
